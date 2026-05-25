@@ -1,7 +1,19 @@
 .env
 
+# IDE / OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Caddy per-site configs (drop your own .caddy files here)
 caddy/conf.d/*.caddy
 
+# Logs
 logs/*/*
 
+# Database init scripts (these are per-machine)
 mysql/databases/*

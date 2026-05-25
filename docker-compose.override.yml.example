@@ -1,0 +1,54 @@
+# Docker Compose Override Example
+# ─────────────────────────────────────────────
+# Copy this to docker-compose.override.yml and
+# uncomment / edit the sections you need.
+# Override files are merged automatically by
+# Docker Compose — no need to modify the main
+# docker-compose.yml.
+# ─────────────────────────────────────────────
+
+services:
+  # ── Expose additional PHP versions locally ──
+  # php:
+  #   ports:
+  #     - "9081:9081"  # PHP 8.1 FPM
+  #     - "9082:9082"  # PHP 8.2 FPM
+  #     - "9083:9083"  # PHP 8.3 FPM
+  #   environment:
+  #     - MY_CUSTOM_VAR=value
+
+  # ── Mount extra host paths into Node ──
+  # node:
+  #   volumes:
+  #     - /path/to/shared:/shared:ro
+
+  # ── Run a local phpMyAdmin alongside ──
+  # phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   container_name: phpmyadmin
+  #   restart: unless-stopped
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_PORT: 3306
+  #   ports:
+  #     - "8080:80"
+  #   networks:
+  #     - omni
+  #   depends_on:
+  #     - mysql
+
+  # ── Change a service's resource limits ──
+  # mysql:
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 2G
+
+  # ── Add environment-specific labels ──
+  # caddy:
+  #   labels:
+  #     - "com.example.environment=development"
+
+  # ── Use a different Redis version locally ──
+  # redis:
+  #   image: redis:7-alpine
