@@ -21,17 +21,16 @@ A containerized development workspace that gives you everything you need to buil
                          │   :443       │
                          └──────┬───────┘
                                 │
-               ┌────────────────┼──────────────────┐
-               │                │                  │
-        ┌──────▼──────┐   ┌─────▼──────┐   ┌────────▼─────────┐
-        │   PHP-FPM   │   │  Node.js   │   │  Infrastructure  │
-        │ 5.6 .. 8.5  │   │ NVM, Bun   │   │                  │
-        │ :9081..9085 │   │ pnpm, yarn │   │  MySQL :3306     │
-        │ Composer    │   │            │   │  Mongo :27017    │
-        │ Xdebug      │   │            │   │  Redis :6379     │
-        └─────────────┘   └────────────┘   │  Mailpit :1025   │
-                                           │  Arcane          │
-                                           └──────────────────┘
+                ┌───────────────┼──────────────────┐
+                │               │                  │
+         ┌──────▼──────┐  ┌─────▼──────┐  ┌────────▼─────────┐
+         │ *PHP-FPM*   │  │ *Node.js*  │  │ *Infrastructure* │
+         │ 5.6 .. 8.5  │  │ NVM        │  │  MySQL :3306     │
+         │ :9081..9085 │  │ Bun        │  │  Mongo :27017    │
+         │ Composer    │  │ pnpm       │  │  Redis :6379     │
+         │ Xdebug      │  │ yarn       │  │  Mailpit :1025   │
+         └─────────────┘  └────────────┘  │  Arcane          │
+                                          └──────────────────┘
 ```
 
 ## Getting Started
