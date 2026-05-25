@@ -1,0 +1,7 @@
+.env
+
+caddy/conf.d/*.caddy
+
+logs/*/*
+
+mysql/databases/*

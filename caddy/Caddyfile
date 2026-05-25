@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Global options
+# ─────────────────────────────────────────────────────────────────────────────
+{
+	# Caddy's internal CA issues certs for *.localhost automatically.
+	# Run `caddy trust` (or `docker compose exec caddy caddy trust`) once on first
+	# setup to install the root CA into your host trust store.
+	local_certs
+
+	log {
+		output file /var/log/caddy/caddy.log {
+			roll_size 100MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		level ERROR
+		format json
+	}
+
+	# Enable admin API so you can reload config without restart
+	admin 0.0.0.0:2019 {
+		origins http://0.0.0.0:2019
+	}
+}
+
+(logging) {
+	log {
+		output file /var/log/caddy/{args[0]}.log {
+			roll_size 100MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		level ERROR
+		format json
+	}
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Import per-site configs (drop a .caddy file in conf.d/ for each new project)
+# ─────────────────────────────────────────────────────────────────────────────
+import /etc/caddy/conf.d/*.caddy

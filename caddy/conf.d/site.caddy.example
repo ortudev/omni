@@ -1,0 +1,49 @@
+# ── Next.js app ──────────────────────────────────────────────────────────────
+# next.localhost {
+#   import logging next.localhost
+
+#   reverse_proxy node:3000
+
+#   @websocket {
+#     header Connection *Upgrade*
+#     header Upgrade websocket
+#   }
+#   reverse_proxy @websocket node:3000
+
+#   encode gzip
+#   log
+# }
+
+# ── Laravel app ──────────────────────────────────────────────────────────────
+# laravel.localhost {
+#   import logging laravel.localhost
+
+#   root * /var/www/laravel/public
+#   try_files {path} {path}/ /index.php?{query}
+
+#   php_fastcgi php:9084 {
+#     root /var/www/laravel/public
+#   }
+
+#   file_server
+#   encode gzip
+#   log
+# }
+
+# ── Arcane ───────────────────────────────────────────────────────────────────
+arcane.localhost {
+  import logging arcane.localhost
+  reverse_proxy arcane:3552
+
+  encode gzip
+  log
+}
+
+# ── Mailpit ──────────────────────────────────────────────────────────────────
+mailpit.localhost {
+  import logging mailpit.localhost
+  reverse_proxy mailpit:8025
+
+  encode gzip
+  log
+}
