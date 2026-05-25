@@ -25,11 +25,11 @@ A containerized development workspace that gives you everything you need to buil
                 │               │                  │
          ┌──────▼──────┐  ┌─────▼──────┐  ┌────────▼─────────┐
          │ *PHP-FPM*   │  │ *Node.js*  │  │ *Infrastructure* │
-         │ 5.6 .. 8.5  │  │ NVM        │  │  MySQL :3306     │
-         │ :9081..9085 │  │ Bun        │  │  Mongo :27017    │
-         │ Composer    │  │ pnpm       │  │  Redis :6379     │
-         │ Xdebug      │  │ yarn       │  │  Mailpit :1025   │
-         └─────────────┘  └────────────┘  │  Arcane          │
+         │ 5.6 .. 8.5  │  │ NVM        │  │ MySQL :3306      │
+         │ :9081..9085 │  │ Bun        │  │ Mongo :27017     │
+         │ Composer    │  │ pnpm       │  │ Redis :6379      │
+         │ Xdebug      │  │ yarn       │  │ Mailpit :1025    │
+         └─────────────┘  └────────────┘  │ Arcane           │
                                           └──────────────────┘
 ```
 
@@ -54,10 +54,14 @@ cp .env.example .env
 #    Set HOME_PATH to your home directory
 #    Adjust USER_UID / USER_GID if needed (run `id -u` and `id -g`)
 
-# 4. Start everything
+# 4. (Optional) Customize the stack
+#    Copy and edit the override file to add extra services or ports
+cp docker-compose.override.yml.example docker-compose.override.yml
+
+# 5. Start everything
 docker compose up -d
 
-# 5. (Optional) Trust Caddy's local CA for zero-browser-warning HTTPS
+# 6. (Optional) Trust Caddy's local CA for zero-browser-warning HTTPS
 docker compose exec caddy caddy trust
 ```
 
@@ -194,5 +198,14 @@ All configuration lives in `.env`. See `.env.example` for a complete reference.
 - **Multiple PHP versions**: Reference the correct FPM port in your Caddy config (see table above).
 - **Caddy reload**: After adding/changing a `.caddy` file, run `docker compose exec -w /etc/caddy caddy caddy reload`.
 - **Workspace shells**: Jump into PHP or Node containers with `docker compose exec php zsh` or `docker compose exec node zsh`.
+- **Customize with overrides**: Copy `docker-compose.override.yml.example` to `docker-compose.override.yml` to add services, expose ports, or mount extra volumes without touching the main compose file.
 - **Logs**: Container logs go to `logs/<service>/`. Caddy access/error logs are here too.
 - **Database imports**: Copy SQL files to `mysql/databases/`; they're available at `/databases/` inside the MySQL container.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for bug reports, feature requests, and pull request guidelines.
+
+This project is governed by a [Code of Conduct](CODE_OF_CONDUCT.md). By participating you agree to abide by its terms.
+
+To report a security vulnerability, please see [SECURITY.md](SECURITY.md).
